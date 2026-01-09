@@ -10,6 +10,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/btn_imc"
         android:background="@color/colorLightGray"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -22,7 +23,9 @@
     <ImageView
         android:src="@drawable/baseline_wb_sunny_24"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description_imc"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
