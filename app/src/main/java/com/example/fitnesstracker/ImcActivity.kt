@@ -1,6 +1,7 @@
 package com.example.fitnesstracker
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -33,6 +34,15 @@ class ImcActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.fields_messages, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+            val weight = editWeight.text.toString().toInt()
+            val height = editHeight.text.toString().toInt()
+
+
+            val result = calculateImc(weight, height)
+            Log.d("teste", "resultado: $result")
+
+
         }
     }
 
@@ -42,5 +52,10 @@ class ImcActivity : AppCompatActivity() {
                 && !editWeight.text.toString().startsWith("0")
                 && !editHeight.text.toString().startsWith("0")
                 )
+    }
+
+    private fun calculateImc(weight: Int, height: Int): Double {
+        val heightPerCent = height / 100.0
+        return weight / (heightPerCent * heightPerCent)
     }
 }
