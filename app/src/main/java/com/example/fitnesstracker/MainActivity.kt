@@ -1,5 +1,6 @@
 package com.example.fitnesstracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         btnImc = findViewById(R.id.btn_imc)
 
         btnImc.setOnClickListener {
-
+            val i = Intent(this, ImcActivity::class.java)
+            startActivity(i)
         }
     }
 }
