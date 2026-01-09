@@ -6,4 +6,5 @@
     <string name="weight">Peso (Kg)</string>
     <string name="height">Altura (cm)</string>
     <string name="bnt_send">CALCULAR</string>
+    <string name="fields_messages">Todos os campos devem ser maiores que zero!</string>
 </resources>
