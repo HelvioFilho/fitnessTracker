@@ -1,7 +1,9 @@
 package com.example.fitnesstracker
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -10,6 +12,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 
 class ImcActivity : AppCompatActivity() {
 
@@ -20,9 +23,20 @@ class ImcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_imc)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        val root = findViewById<android.view.View>(R.id.main)
+
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+
+            v.updatePadding(
+                left = systemBars.left,
+                top = systemBars.top,
+                right = systemBars.right,
+                bottom = maxOf(systemBars.bottom, ime.bottom)
+            )
+
             insets
         }
 
@@ -51,6 +65,9 @@ class ImcActivity : AppCompatActivity() {
                 ) { dialog, which -> }
                 .create()
                 .show()
+
+            val service = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            service.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
     }
 
